@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shreyas Koulage — QA Automation Engineer</title>
+  <meta name="description" content="Portfolio of Shreyas Koulage, QA Automation Engineer based in Pune, India. Specializing in Selenium (Java), REST Assured, TestNG, API & SQL testing, and CI/CD frameworks." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS — Easily customize theme colors below
+       Primary: #141923 (Deep Editorial Slate) | Accent: #0F766E (Precision Teal)
+       ========================================================================== */
+    :root {
+      --bg-page: #FAF9F6;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F2F0EA;
+      --text-primary: #141923;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+      --accent: #0F766E;
+      --accent-hover: #0B5D56;
+      --accent-soft: #E6F4F1;
+      --accent-ink: #0F766E;
+      --border-hairline: #E5E2DA;
+      --border-strong: #CFCBC0;
+      --shadow-card: 0 1px 2px rgba(20, 25, 35, 0.04), 0 8px 24px rgba(20, 25, 35, 0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #0D1117;
+      --bg-surface: #141A23;
+      --bg-subtle: #1B2330;
+      --text-primary: #F3F4F6;
+      --text-secondary: #CBD5E1;
+      --text-muted: #94A3B8;
+      --accent: #2DD4BF;
+      --accent-hover: #5EEAD4;
+      --accent-soft: rgba(45, 212, 191, 0.12);
+      --accent-ink: #2DD4BF;
+      --border-hairline: #232D3D;
+      --border-strong: #334155;
+      --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.25), 0 12px 28px rgba(0, 0, 0, 0.28);
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    .font-serif-editorial {
+      font-family: 'Newsreader', Georgia, serif;
+    }
+
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    }
+
+    .surface-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      box-shadow: var(--shadow-card);
+      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
+    }
+
+    .surface-card-hover:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-2px);
+    }
+
+    .surface-subtle {
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-hairline);
+    }
+
+    .border-hairline {
+      border-color: var(--border-hairline);
+    }
+
+    .text-secondary {
+      color: var(--text-secondary);
+    }
+
+    .text-muted {
+      color: var(--text-muted);
+    }
+
+    .text-accent {
+      color: var(--accent-ink);
+    }
+
+    .bg-accent {
+      background-color: var(--accent);
+      color: #FFFFFF;
+    }
+
+    [data-theme="dark"] .bg-accent {
+      color: #0B1215;
+    }
+
+    .bg-accent:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .bg-accent-soft {
+      background-color: var(--accent-soft);
+      color: var(--accent-ink);
+    }
+
+    .btn-primary {
+      background-color: var(--text-primary);
+      color: var(--bg-page);
+      transition: opacity 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-primary);
+      background-color: var(--bg-subtle);
+      transform: translateY(-1px);
+    }
+
+    .filter-pill {
+      border: 1px solid var(--border-hairline);
+      color: var(--text-secondary);
+      background-color: transparent;
+      transition: all 0.2s ease;
+    }
+
+    .filter-pill:hover {
+      border-color: var(--border-strong);
+      color: var(--text-primary);
+    }
+
+    .filter-pill.active {
+      background-color: var(--text-primary);
+      color: var(--bg-page);
+      border-color: var(--text-primary);
+    }
+
+    .nav-backdrop {
+      background-color: color-mix(in srgb, var(--bg-page) 88%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
+    .input-field {
+      background-color: var(--bg-page);
+      border: 1px solid var(--border-strong);
+      color: var(--text-primary);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    /* Editorial subtle grid accent behind hero */
+    .hero-grid {
+      background-image: linear-gradient(to right, var(--border-hairline) 1px, transparent 1px),
+                        linear-gradient(to bottom, var(--border-hairline) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+    }
+
+    @media print {
+      header, footer, #work, #about, #experience, #contact, #hero, #toast {
+        display: none !important;
+      }
+      #resume-modal {
+        position: static !important;
+        display: block !important;
+        background: white !important;
+        padding: 0 !important;
+      }
+      #resume-modal-panel {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-teal-700 selection:text-white">
+
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-md bg-accent text-sm font-medium">
+    Skip to main content
+  </a>
+
+  <!-- Header & Navigation -->
+  <header class="sticky top-0 z-40 nav-backdrop border-b border-hairline">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-4">
+      <a href="#hero" class="flex items-center gap-2.5 group focus:outline-none">
+        <span class="w-8 h-8 rounded-md bg-accent flex items-center justify-center font-mono-tech text-xs font-semibold tracking-tight">
+          SK
+        </span>
+        <span class="font-semibold text-sm sm:text-base tracking-tight">Shreyas Koulage</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav aria-label="Primary navigation" class="hidden md:flex items-center gap-7 text-sm font-medium text-secondary">
+        <a href="#work" class="hover:text-[var(--text-primary)] transition-colors">Work</a>
+        <a href="#about" class="hover:text-[var(--text-primary)] transition-colors">About &amp; Skills</a>
+        <a href="#experience" class="hover:text-[var(--text-primary)] transition-colors">Experience</a>
+        <a href="#contact" class="hover:text-[var(--text-primary)] transition-colors">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="open-resume-nav" type="button" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium btn-secondary">
+          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+          <span>Resume</span>
+        </button>
+
+        <button id="theme-toggle" type="button" aria-label="Toggle color theme" class="w-9 h-9 rounded-md border border-hairline flex items-center justify-center text-secondary hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] transition-colors">
+          <i id="theme-icon-sun" data-lucide="sun" class="w-4 h-4 hidden"></i>
+          <i id="theme-icon-moon" data-lucide="moon" class="w-4 h-4"></i>
+        </button>
+
+        <button id="mobile-menu-btn" type="button" aria-label="Open navigation menu" aria-expanded="false" class="md:hidden w-9 h-9 rounded-md border border-hairline flex items-center justify-center text-secondary hover:text-[var(--text-primary)]">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-hairline px-5 py-4 space-y-3" style="background-color: var(--bg-page);">
+      <nav aria-label="Mobile navigation" class="flex flex-col space-y-2.5 text-sm font-medium text-secondary">
+        <a href="#work" class="mobile-nav-link py-1 hover:text-[var(--text-primary)]">Selected Work</a>
+        <a href="#about" class="mobile-nav-link py-1 hover:text-[var(--text-primary)]">About &amp; Skills</a>
+        <a href="#experience" class="mobile-nav-link py-1 hover:text-[var(--text-primary)]">Experience &amp; Proof</a>
+        <a href="#contact" class="mobile-nav-link py-1 hover:text-[var(--text-primary)]">Contact</a>
+        <button id="open-resume-mobile" type="button" class="text-left py-1 text-accent font-medium flex items-center gap-1.5">
+          <i data-lucide="file-text" class="w-4 h-4"></i>
+          <span>View Printable Resume</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="flex-1">
+
+    <!-- =====================================================================
+         1. HERO SECTION
+         ===================================================================== -->
+    <section id="hero" class="relative overflow-hidden border-b border-hairline">
+      <div class="hero-grid absolute inset-0 pointer-events-none opacity-45" aria-hidden="true"></div>
+
+      <div class="relative max-w-6xl mx-auto px-5 sm:px-8 pt-14 pb-16 sm:pt-20 sm:pb-24">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+
+          <!-- Left Editorial Column -->
+          <div class="lg:col-span-8 space-y-6">
+            <div class="flex flex-wrap items-center gap-3 text-xs font-mono-tech">
+              <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-soft font-medium">
+                <span class="w-2 h-2 rounded-full bg-current animate-pulse"></span>
+                Available Immediately · QA / SDET Roles
+              </span>
+              <span class="text-muted flex items-center gap-1.5">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                Pune, India (IST · UTC+5:30)
+              </span>
+            </div>
+
+            <div class="space-y-4">
+              <p class="text-xs sm:text-sm font-mono-tech uppercase tracking-[0.14em] text-muted">
+                QA Automation Engineer &amp; Software Test Engineer
+              </p>
+              <h1 class="font-serif-editorial text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] tracking-tight font-medium">
+                I engineer UI, API, and database test automation that ships reliable releases <span class="italic text-accent">faster.</span>
+              </h1>
+              <p class="text-base sm:text-lg text-secondary max-w-2xl leading-relaxed">
+                Testing web applications across UI, REST API, and MySQL layers in Agile sprints—combining Selenium (Java), REST Assured, TestNG, and GitHub Actions CI to cut repetitive regression effort by ~40%.
+              </p>
+            </div>
+
+            <!-- Two Clear CTA Buttons -->
+            <div class="flex flex-wrap items-center gap-3.5 pt-2">
+              <a href="#work" class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium">
+                <span>View Work</span>
+                <i data-lucide="arrow-down-right" class="w-4 h-4"></i>
+              </a>
+              <a href="#contact" class="btn-secondary inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-medium">
+                <span>Contact Me</span>
+                <i data-lucide="mail" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right 30-Second Executive Proof Card -->
+          <aside aria-label="Quick impact overview" class="lg:col-span-4 surface-card rounded-xl p-6 space-y-5">
+            <div class="flex items-center justify-between border-b border-hairline pb-3.5">
+              <span class="font-mono-tech text-[11px] uppercase tracking-[0.14em] text-muted">30-Second Brief</span>
+              <span class="font-mono-tech text-[11px] text-accent font-medium">Verified Impact</span>
+            </div>
+
+            <dl class="grid grid-cols-2 gap-4">
+              <div class="space-y-1">
+                <dt class="text-xs text-muted">Regression Efficiency</dt>
+                <dd class="font-serif-editorial text-3xl font-medium tracking-tight text-accent">~40%</dd>
+                <dd class="text-[11px] text-secondary leading-snug">Faster execution via reusable Selenium scripts</dd>
+              </div>
+              <div class="space-y-1">
+                <dt class="text-xs text-muted">Full-Stack QA</dt>
+                <dd class="font-serif-editorial text-3xl font-medium tracking-tight">3-Layer</dd>
+                <dd class="text-[11px] text-secondary leading-snug">UI, REST API &amp; MySQL backend validation</dd>
+              </div>
+              <div class="space-y-1 pt-2 border-t border-hairline">
+                <dt class="text-xs text-muted">Industry Experience</dt>
+                <dd class="font-serif-editorial text-2xl font-medium tracking-tight">6 Months</dd>
+                <dd class="text-[11px] text-secondary leading-snug">NBFI platform QA in Agile/Scrum sprints</dd>
+              </div>
+              <div class="space-y-1 pt-2 border-t border-hairline">
+                <dt class="text-xs text-muted">Research Proof</dt>
+                <dd class="font-serif-editorial text-2xl font-medium tracking-tight">ICCSC ’26</dd>
+                <dd class="text-[11px] text-secondary leading-snug">Published network security paper</dd>
+              </div>
+            </dl>
+
+            <div class="pt-3 border-t border-hairline flex items-center justify-between text-xs text-muted">
+              <span>Open to Pune, Mumbai &amp; Hyderabad</span>
+              <a href="https://github.com/ShreyasK1809" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline font-medium inline-flex items-center gap-1">
+                GitHub
+                <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         2. SELECTED WORK / PROJECTS
+         ===================================================================== -->
+    <section id="work" class="py-16 sm:py-24 border-b border-hairline">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+
+        <!-- Section Header + Filter Pills -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal">
+          <div class="space-y-2.5 max-w-2xl">
+            <p class="font-mono-tech text-xs uppercase tracking-[0.14em] text-accent">01 / Selected Work</p>
+            <h2 class="font-serif-editorial text-3xl sm:text-4xl font-medium tracking-tight">
+              Frameworks, regression suites, and verified systems.
+            </h2>
+            <p class="text-sm sm:text-base text-secondary">
+              Each project follows a clear engineering arc: the quality bottleneck, the architecture or test strategy used, and the measurable result.
+            </p>
+          </div>
+
+          <div id="project-filters" role="group" aria-label="Filter projects by category" class="flex flex-wrap gap-2">
+            <button type="button" data-filter="all" class="filter-pill active px-3.5 py-1.5 rounded-full text-xs font-medium">
+              All Projects
+            </button>
+            <button type="button" data-filter="automation" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium">
+              Automation &amp; CI
+            </button>
+            <button type="button" data-filter="api-db" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium">
+              API &amp; Database
+            </button>
+            <button type="button" data-filter="security" class="filter-pill px-3.5 py-1.5 rounded-full text-xs font-medium">
+              Security QA
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamically Rendered Project Cards (Populated from PROJECTS array in JS) -->
+        <div id="projects-container" class="space-y-8"></div>
+
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         3. ABOUT & SKILLS
+         ===================================================================== -->
+    <section id="about" class="py-16 sm:py-24 border-b border-hairline">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+
+          <!-- Left: Concise 4–5 Line Bio -->
+          <div class="lg:col-span-5 space-y-5 reveal">
+            <p class="font-mono-tech text-xs uppercase tracking-[0.14em] text-accent">02 / About &amp; Approach</p>
+            <h2 class="font-serif-editorial text-3xl sm:text-4xl font-medium tracking-tight leading-tight">
+              Quality engineering grounded in code, APIs, and data integrity.
+            </h2>
+            <p class="text-sm sm:text-base text-secondary leading-relaxed">
+              I’m Shreyas Koulage, a Computer Science &amp; Engineering graduate (B.Tech in IoT &amp; Cyber Security, ADCET) focused on QA Automation and Software Test Engineering. During my 6-month QA internship at Cravita Technologies, I tested a production NBFI web application across UI, REST API, and MySQL layers inside Agile/Scrum sprints—cutting repetitive regression effort by ~40%. I enjoy designing maintainable Page Object Model frameworks with parallel execution and GitHub Actions CI, and I’m currently expanding into Playwright (TypeScript) and AI/LLM testing workflows.
+            </p>
+
+            <div class="surface-subtle rounded-lg p-4 space-y-2">
+              <p class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Currently Exploring</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded text-xs font-medium surface-card">Playwright (TypeScript)</span>
+                <span class="px-2.5 py-1 rounded text-xs font-medium surface-card">AI / LLM Evaluation &amp; Testing</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Grouped Core Skills & Tools -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 reveal">
+
+            <!-- Group 1 -->
+            <div class="surface-card rounded-xl p-5 space-y-3.5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold tracking-tight">Automation &amp; Frameworks</h3>
+                <i data-lucide="cpu" class="w-4 h-4 text-accent"></i>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Selenium WebDriver</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">REST Assured</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">TestNG</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Maven</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Page Object Model</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">ThreadLocal Parallel</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">ExtentReports</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Apache POI</span>
+              </div>
+            </div>
+
+            <!-- Group 2 -->
+            <div class="surface-card rounded-xl p-5 space-y-3.5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold tracking-tight">Languages, API &amp; Database</h3>
+                <i data-lucide="database" class="w-4 h-4 text-accent"></i>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Java (17)</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">SQL</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Postman</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">REST API Validation</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">MySQL</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Backend Data Checks</span>
+              </div>
+            </div>
+
+            <!-- Group 3 -->
+            <div class="surface-card rounded-xl p-5 space-y-3.5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold tracking-tight">Testing Disciplines</h3>
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent"></i>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Functional</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Regression</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Smoke &amp; Sanity</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">UI Testing</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">API Testing</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Database Testing</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Integration &amp; E2E</span>
+              </div>
+            </div>
+
+            <!-- Group 4 -->
+            <div class="surface-card rounded-xl p-5 space-y-3.5">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-semibold tracking-tight">CI/CD, Tracking &amp; Process</h3>
+                <i data-lucide="git-branch" class="w-4 h-4 text-accent"></i>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">GitHub Actions</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Git &amp; GitHub</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">JIRA</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Agile / Scrum</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">SDLC &amp; STLC</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Defect Life Cycle</span>
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">Test Case Design</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         4. EXPERIENCE & PROOF
+         ===================================================================== -->
+    <section id="experience" class="py-16 sm:py-24 border-b border-hairline">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+
+        <div class="space-y-2.5 max-w-2xl mb-12 reveal">
+          <p class="font-mono-tech text-xs uppercase tracking-[0.14em] text-accent">03 / Experience &amp; Proof</p>
+          <h2 class="font-serif-editorial text-3xl sm:text-4xl font-medium tracking-tight">
+            Track record across production QA, education, and published research.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+          <!-- Primary Role Card -->
+          <article class="lg:col-span-7 surface-card rounded-xl p-6 sm:p-8 space-y-5 reveal">
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2 border-b border-hairline pb-4">
+              <div>
+                <h3 class="text-lg font-semibold tracking-tight">Software QA Intern</h3>
+                <p class="text-sm text-accent font-medium">
+                  <a href="https://www.cravitaindia.com/" target="_blank" rel="noopener noreferrer" class="hover:underline inline-flex items-center gap-1">
+                    Cravita Technologies
+                    <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                  </a>
+                  <span class="text-muted font-normal"> · NBFI Web Application</span>
+                </p>
+              </div>
+              <span class="font-mono-tech text-xs px-2.5 py-1 rounded-md surface-subtle self-start">
+                Jan 2026 – Jun 2026
+              </span>
+            </div>
+
+            <ul class="space-y-3 text-sm text-secondary leading-relaxed">
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-accent shrink-0 mt-0.5"></i>
+                <span>Developed reusable <strong class="text-[var(--text-primary)] font-medium">Selenium (Java)</strong> scripts for navigation flows, footer links, form validations, and end-to-end regression, improving testing efficiency by <strong class="text-[var(--text-primary)] font-medium">~40%</strong> and reducing repetitive manual effort.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-accent shrink-0 mt-0.5"></i>
+                <span>Executed functional, UI, regression, API, and database tests on new features within Agile/Scrum sprints to support stable releases.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-accent shrink-0 mt-0.5"></i>
+                <span>Validated REST API responses in <strong class="text-[var(--text-primary)] font-medium">Postman</strong> and cross-checked backend data with <strong class="text-[var(--text-primary)] font-medium">SQL queries on MySQL</strong> to catch data and integration defects early.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <i data-lucide="check" class="w-4 h-4 text-accent shrink-0 mt-0.5"></i>
+                <span>Logged, tracked, and re-verified defects in <strong class="text-[var(--text-primary)] font-medium">JIRA</strong> across the defect life cycle and collaborated with developers and QA leads to close coverage gaps.</span>
+              </li>
+            </ul>
+          </article>
+
+          <!-- Education & Academic Proof -->
+          <div class="lg:col-span-5 space-y-5 reveal">
+
+            <!-- Publication Proof -->
+            <div class="surface-card rounded-xl p-6 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-accent font-medium">Published Research</span>
+                <span class="font-mono-tech text-xs text-muted">2026</span>
+              </div>
+              <h3 class="text-base font-semibold leading-snug">
+                ICCSC-2026 Conference Paper Presenter
+              </h3>
+              <p class="text-sm text-secondary leading-relaxed">
+                Co-authored and presented a peer-reviewed paper on <em>Network Security Auditing and Penetration Testing</em> at ICCSC-2026, organized by ABES Engineering College, Ghaziabad.
+              </p>
+            </div>
+
+            <!-- Education Card -->
+            <div class="surface-card rounded-xl p-6 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Education</span>
+                <span class="font-mono-tech text-xs text-muted">2021 – 2025</span>
+              </div>
+              <h3 class="text-base font-semibold leading-snug">
+                B.Tech — Computer Science &amp; Engineering
+              </h3>
+              <p class="text-sm text-secondary">
+                Specialization in IoT &amp; Cyber Security (including Blockchain Technology)
+              </p>
+              <p class="text-xs text-muted">
+                Annasaheb Dange College of Engineering and Technology (ADCET), Ashta
+              </p>
+            </div>
+
+            <!-- Additional Credentials -->
+            <div class="surface-subtle rounded-xl p-5 space-y-2.5">
+              <p class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Workshops &amp; Activities</p>
+              <ul class="space-y-1.5 text-xs sm:text-sm text-secondary">
+                <li>• Web Application Hacking Workshop — Ethical hacking &amp; security fundamentals</li>
+                <li>• “Clash of the Minds” Group Discussion — ADCET</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         5. CONTACT SECTION
+         ===================================================================== -->
+    <section id="contact" class="py-16 sm:py-24">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+          <!-- Left: Direct Contact & Links -->
+          <div class="lg:col-span-5 space-y-6 reveal">
+            <div class="space-y-2.5">
+              <p class="font-mono-tech text-xs uppercase tracking-[0.14em] text-accent">04 / Contact</p>
+              <h2 class="font-serif-editorial text-3xl sm:text-4xl font-medium tracking-tight">
+                Let’s talk about your QA team’s next release.
+              </h2>
+              <p class="text-sm sm:text-base text-secondary leading-relaxed">
+                Looking for an immediate-joiner QA Automation Engineer or SDET in Pune, Mumbai, or Hyderabad? Reach out directly by email or send a quick note here.
+              </p>
+            </div>
+
+            <!-- Direct Email & Copy -->
+            <div class="surface-card rounded-xl p-5 space-y-4">
+              <div class="space-y-1">
+                <span class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Direct Email</span>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <a href="mailto:shreyaskoulage027@gmail.com" class="text-sm sm:text-base font-medium hover:text-accent transition-colors break-all">
+                    shreyaskoulage027@gmail.com
+                  </a>
+                  <button id="copy-email-btn" type="button" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium btn-secondary">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                    <span id="copy-email-label">Copy</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="pt-3 border-t border-hairline flex items-center justify-between text-sm">
+                <span class="text-muted">Phone</span>
+                <a href="tel:+919359889789" class="font-mono-tech text-xs sm:text-sm hover:text-accent transition-colors">
+                  +91 9359889789
+                </a>
+              </div>
+            </div>
+
+            <!-- Profile & Resume Links -->
+            <div class="flex flex-wrap gap-2.5">
+              <a href="https://www.linkedin.com/in/shreyas-koulage/" target="_blank" rel="noopener noreferrer" class="btn-secondary inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-medium">
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://github.com/ShreyasK1809" target="_blank" rel="noopener noreferrer" class="btn-secondary inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-medium">
+                <i data-lucide="github" class="w-4 h-4"></i>
+                <span>GitHub</span>
+              </a>
+              <button id="open-resume-contact" type="button" class="btn-secondary inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs sm:text-sm font-medium">
+                <i data-lucide="file-text" class="w-4 h-4"></i>
+                <span>Resume</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right: Simple Accessible Contact Form -->
+          <div class="lg:col-span-7 surface-card rounded-xl p-6 sm:p-8 reveal">
+            <form id="contact-form" novalidate class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label for="contact-name" class="block text-xs font-medium text-secondary">Your Name</label>
+                  <input id="contact-name" name="name" type="text" required placeholder="e.g. Priya Sharma" class="input-field w-full px-3.5 py-2.5 rounded-lg text-sm" />
+                </div>
+                <div class="space-y-1.5">
+                  <label for="contact-email" class="block text-xs font-medium text-secondary">Work Email</label>
+                  <input id="contact-email" name="email" type="email" required placeholder="name@company.com" class="input-field w-full px-3.5 py-2.5 rounded-lg text-sm" />
+                </div>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="contact-subject" class="block text-xs font-medium text-secondary">Topic / Role</label>
+                <input id="contact-subject" name="subject" type="text" placeholder="e.g. QA Automation Engineer opportunity — Pune" class="input-field w-full px-3.5 py-2.5 rounded-lg text-sm" />
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="contact-message" class="block text-xs font-medium text-secondary">Message</label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Share a bit about the role, team, or testing stack..." class="input-field w-full px-3.5 py-2.5 rounded-lg text-sm resize-y"></textarea>
+              </div>
+
+              <div id="form-error" role="alert" class="hidden text-xs text-red-600 dark:text-red-400 font-medium"></div>
+
+              <div class="flex flex-wrap items-center justify-between gap-4 pt-1">
+                <p class="text-xs text-muted">Opens a pre-filled email draft or copies your message cleanly.</p>
+                <button type="submit" class="btn-primary inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium">
+                  <span>Send Message</span>
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </form>
+
+            <!-- Post-Submit Confirmation Panel -->
+            <div id="form-success" class="hidden mt-5 p-4 rounded-lg bg-accent-soft space-y-2.5">
+              <div class="flex items-center gap-2 font-medium text-sm">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span>Message ready to send to Shreyas Koulage</span>
+              </div>
+              <p class="text-xs text-secondary">
+                Your note has been formatted for your email client. Click below if your mail app didn’t open automatically.
+              </p>
+              <div class="flex flex-wrap gap-2.5 pt-1">
+                <a id="mailto-fallback-link" href="mailto:shreyaskoulage027@gmail.com" class="bg-accent inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-medium">
+                  <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                  <span>Open Email Draft</span>
+                </a>
+                <button id="reset-form-btn" type="button" class="btn-secondary px-3.5 py-1.5 rounded-md text-xs font-medium">
+                  Write Another
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-hairline py-8">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
+      <p>© <span id="footer-year">2026</span> Shreyas Koulage · Pune, India (IST)</p>
+      <div class="flex items-center gap-5">
+        <a href="#work" class="hover:text-[var(--text-primary)] transition-colors">Work</a>
+        <a href="#about" class="hover:text-[var(--text-primary)] transition-colors">About</a>
+        <a href="#experience" class="hover:text-[var(--text-primary)] transition-colors">Experience</a>
+        <a href="https://www.linkedin.com/in/shreyas-koulage/" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-primary)] transition-colors">LinkedIn</a>
+        <a href="https://github.com/ShreyasK1809" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--text-primary)] transition-colors">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =======================================================================
+       CASE STUDY MODAL
+       ======================================================================= -->
+  <div id="case-study-modal" role="dialog" aria-modal="true" aria-labelledby="modal-project-title" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/55 backdrop-blur-sm">
+    <div class="surface-card rounded-2xl max-w-2xl w-full max-h-[88vh] overflow-y-auto p-6 sm:p-8 space-y-6">
+      <div class="flex items-start justify-between gap-4 border-b border-hairline pb-4">
+        <div class="space-y-1">
+          <p id="modal-project-meta" class="font-mono-tech text-xs text-accent"></p>
+          <h3 id="modal-project-title" class="font-serif-editorial text-2xl sm:text-3xl font-medium tracking-tight"></h3>
+        </div>
+        <button id="close-case-modal" type="button" aria-label="Close case study" class="w-8 h-8 rounded-md border border-hairline flex items-center justify-center text-secondary hover:text-[var(--text-primary)] shrink-0">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <p id="modal-project-summary" class="text-sm sm:text-base text-secondary leading-relaxed"></p>
+
+      <div class="space-y-4">
+        <div class="surface-subtle rounded-lg p-4 space-y-1">
+          <h4 class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Problem</h4>
+          <p id="modal-project-problem" class="text-sm text-[var(--text-primary)] leading-relaxed"></p>
+        </div>
+        <div class="surface-subtle rounded-lg p-4 space-y-1">
+          <h4 class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Approach &amp; Architecture</h4>
+          <p id="modal-project-approach" class="text-sm text-[var(--text-primary)] leading-relaxed"></p>
+        </div>
+        <div class="rounded-lg p-4 bg-accent-soft space-y-1">
+          <h4 class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-accent font-semibold">Measurable Outcome</h4>
+          <p id="modal-project-outcome" class="text-sm font-medium text-[var(--text-primary)] leading-relaxed"></p>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Key Engineering Highlights</h4>
+        <ul id="modal-project-highlights" class="space-y-2 text-sm text-secondary"></ul>
+      </div>
+
+      <div class="space-y-2">
+        <h4 class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted">Tools &amp; Stack</h4>
+        <div id="modal-project-tools" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div class="pt-4 border-t border-hairline flex flex-wrap items-center justify-between gap-3">
+        <a id="modal-project-link" href="https://github.com/ShreyasK1809" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium">
+          <span id="modal-project-link-label">View on GitHub</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+        <button id="close-case-modal-footer" type="button" class="btn-secondary px-4 py-2 rounded-lg text-xs sm:text-sm font-medium">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       RESUME MODAL (Printable)
+       ======================================================================= -->
+  <div id="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/55 backdrop-blur-sm">
+    <div id="resume-modal-panel" class="surface-card rounded-2xl max-w-3xl w-full max-h-[88vh] overflow-y-auto p-6 sm:p-8 space-y-6">
+      <div class="flex items-start justify-between gap-4 border-b border-hairline pb-4">
+        <div>
+          <h3 id="resume-modal-title" class="font-serif-editorial text-2xl sm:text-3xl font-medium">Shreyas Koulage</h3>
+          <p class="text-xs sm:text-sm text-secondary mt-1">
+            QA Automation Engineer · +91 9359889789 · shreyaskoulage027@gmail.com
+          </p>
+        </div>
+        <div class="flex items-center gap-2 no-print">
+          <button id="print-resume-btn" type="button" class="btn-primary inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md text-xs font-medium">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+            <span>Print / PDF</span>
+          </button>
+          <button id="close-resume-modal" type="button" aria-label="Close resume" class="w-8 h-8 rounded-md border border-hairline flex items-center justify-center text-secondary hover:text-[var(--text-primary)]">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-5 text-sm text-secondary leading-relaxed">
+        <div>
+          <h4 class="font-mono-tech text-xs uppercase tracking-[0.12em] text-accent mb-2">Profile Summary</h4>
+          <p>
+            QA Automation Engineer with 6 months of internship experience testing an NBFI web application across UI, API, and database layers in Agile/Scrum sprints. Built a hybrid automation framework (Selenium, REST Assured, TestNG, Maven) using Page Object Model, ThreadLocal parallel execution, data-driven testing, ExtentReports, and a GitHub Actions CI pipeline. Experienced in Postman API validation, SQL data verification on MySQL, and defect tracking in JIRA.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="font-mono-tech text-xs uppercase tracking-[0.12em] text-accent mb-2">Experience</h4>
+          <p class="font-semibold text-[var(--text-primary)]">QA Intern — Cravita Technologies (01/2026 – 06/2026)</p>
+          <p class="text-xs text-muted mb-2">NBFI Web Application | Selenium (Java), TestNG, Maven, Postman, MySQL, JIRA</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Developed reusable Selenium (Java) scripts for navigation flows, footer links, form validations, and E2E regression, improving testing efficiency by ~40%.</li>
+            <li>Executed functional, UI, regression, API, and database tests within Agile/Scrum sprints.</li>
+            <li>Validated REST API responses in Postman and cross-checked backend records using SQL queries on MySQL.</li>
+            <li>Tracked defects through the JIRA defect life cycle and prepared test cases and execution reports.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono-tech text-xs uppercase tracking-[0.12em] text-accent mb-2">Key Projects</h4>
+          <ul class="space-y-2">
+            <li>
+              <strong class="text-[var(--text-primary)]">SauceDemo Hybrid QA Automation Framework (2026):</strong> Java 17, Selenium WebDriver, REST Assured, TestNG, Maven, POM, ThreadLocal parallel execution, Apache POI, ExtentReports, GitHub Actions CI.
+            </li>
+            <li>
+              <strong class="text-[var(--text-primary)]">Network Security Auditing &amp; Penetration Testing Framework (07/2024 – 04/2025):</strong> Software Tester — manual &amp; Selenium (Java) verification; research paper presented at ICCSC-2026 (ABES Engineering College, Ghaziabad).
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-mono-tech text-xs uppercase tracking-[0.12em] text-accent mb-2">Education</h4>
+          <p class="font-semibold text-[var(--text-primary)]">Annasaheb Dange College of Engineering and Technology (ADCET) · 2021 – 2025</p>
+          <p>B.Tech — Computer Science &amp; Engineering (IoT &amp; Cyber Security including Blockchain Technology)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite" class="fixed bottom-5 right-5 z-50 hidden px-4 py-2.5 rounded-lg text-xs font-medium shadow-lg bg-accent">
+    Copied to clipboard
+  </div>
+
+  <script>
+    /* =========================================================================
+       PORTFOLIO PROJECTS DATA — Easy to Update!
+       To add, edit, or reorder a project, simply modify an object in this array.
+       Categories supported by filter pills: "automation", "api-db", "security"
+       ========================================================================= */
+    const PROJECTS = [
+      {
+        id: "saucedemo-hybrid-automation",
+        number: "01",
+        title: "E-Commerce Hybrid QA Automation Framework",
+        role: "QA Automation Engineer",
+        year: "2026",
+        categories: ["automation", "api-db"],
+        summary: "End-to-end Java 17 hybrid framework unifying SauceDemo UI automation and ReqRes REST API testing with parallel execution and GitHub Actions CI.",
+        problem: "Manual regression across multi-step e-commerce checkout flows and backend APIs was slow, error-prone, and lacked automated execution reporting.",
+        approach: "Architected a modular Page Object Model (POM) framework using Selenium WebDriver (4.21.0), REST Assured (5.4.0), TestNG (7.10.2), ThreadLocal parallel execution, Apache POI data-driven tests, ExtentReports (5.1.1), and a GitHub Actions CI pipeline.",
+        outcome: "Automated cross-layer UI and API regression suites triggered on every push via Maven and TestNG, delivering structured ExtentReports HTML execution dashboards with zero manual intervention.",
+        highlights: [
+          "Implemented ThreadLocal WebDriver management for safe parallel browser execution via testng.xml.",
+          "Combined UI checkout validations (SauceDemo) with REST Assured API contract checks (ReqRes).",
+          "Externalized test datasets with Apache POI and integrated automated ExtentReports artifacts in GitHub Actions."
+        ],
+        tools: ["Java 17", "Selenium WebDriver", "REST Assured", "TestNG", "Maven", "ExtentReports", "Apache POI", "GitHub Actions"],
+        linkUrl: "https://github.com/ShreyasK1809",
+        linkLabel: "GitHub Profile"
+      },
+      {
+        id: "nbfi-qa-regression-suite",
+        number: "02",
+        title: "NBFI Web Application QA & Regression Suite",
+        role: "Software QA Intern · Cravita Technologies",
+        year: "Jan – Jun 2026",
+        categories: ["automation", "api-db"],
+        summary: "Full-stack functional, UI, REST API, and MySQL database validation for a production NBFI platform delivered across Agile/Scrum sprints.",
+        problem: "Frequent sprint releases on a financial web application created repetitive manual regression overhead and risked silent UI-to-database data mismatches.",
+        approach: "Built reusable Selenium (Java), TestNG, and Maven scripts for navigation, footer links, form validations, and E2E flows; validated REST API payloads in Postman, verified backend state via MySQL queries, and tracked defects in JIRA.",
+        outcome: "Improved testing efficiency by ~40%, cut repetitive manual effort across sprints, and caught backend data and integration defects prior to release.",
+        highlights: [
+          "Automated core regression paths including navigation flows, form validations, and critical E2E scenarios.",
+          "Cross-verified Postman API responses against MySQL tables to catch integration discrepancies early.",
+          "Owned end-to-end JIRA defect tracking, re-testing, and coverage gap reporting with developers and QA leads."
+        ],
+        tools: ["Selenium (Java)", "TestNG", "Maven", "Postman", "MySQL", "SQL", "JIRA", "Agile/Scrum"],
+        linkUrl: "https://www.cravitaindia.com/",
+        linkLabel: "Cravita Technologies"
+      },
+      {
+        id: "network-security-auditing",
+        number: "03",
+        title: "Network Security Auditing & Penetration Testing Framework",
+        role: "Software Tester & Research Co-Author",
+        year: "Jul 2024 – Apr 2025",
+        categories: ["security", "automation"],
+        summary: "End-to-end functional verification and peer-reviewed research for a modular network security auditing and penetration testing framework.",
+        problem: "Security auditing modules required rigorous verification to ensure vulnerability checks and generated assessment reports matched expected security requirements.",
+        approach: "Designed and executed structured manual test cases alongside Selenium (Java) checks across core framework modules, validated outputs and reports, logged defects, and re-verified fixes end to end.",
+        outcome: "Confirmed a stable end-to-end build ahead of demonstration and co-authored a peer-reviewed research paper presented at ICCSC-2026 (ABES Engineering College, Ghaziabad).",
+        highlights: [
+          "Validated core auditing modules and generated security reports against functional baselines.",
+          "Managed defect reporting and regression verification through to final build sign-off.",
+          "Presented the project's research paper at ICCSC-2026, highlighting threat mitigation findings."
+        ],
+        tools: ["Selenium (Java)", "Manual Testing", "Test Case Design", "Defect Tracking", "Network Security"],
+        linkUrl: "https://github.com/ShreyasK1809",
+        linkLabel: "View on GitHub"
+      }
+    ];
+
+    /* =========================================================================
+       DOM RENDERING & INTERACTIVITY
+       ========================================================================= */
+    const projectsContainer = document.getElementById("projects-container");
+    const filterContainer = document.getElementById("project-filters");
+    let activeFilter = "all";
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function renderProjects(filter = "all") {
+      const filtered = filter === "all"
+        ? PROJECTS
+        : PROJECTS.filter((p) => p.categories.includes(filter));
+
+      projectsContainer.innerHTML = filtered.map((project) => `
+        <article class="surface-card surface-card-hover rounded-2xl p-6 sm:p-8 space-y-6">
+          <!-- Top Header Row -->
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 border-b border-hairline pb-5">
+            <div class="space-y-1.5">
+              <div class="flex flex-wrap items-center gap-2.5 text-xs font-mono-tech">
+                <span class="text-accent font-semibold">${escapeHtml(project.number)}</span>
+                <span class="text-muted">·</span>
+                <span class="text-muted">${escapeHtml(project.role)}</span>
+                <span class="text-muted">·</span>
+                <span class="text-muted">${escapeHtml(project.year)}</span>
+              </div>
+              <h3 class="font-serif-editorial text-2xl sm:text-[1.75rem] font-medium tracking-tight leading-snug">
+                ${escapeHtml(project.title)}
+              </h3>
+              <p class="text-sm sm:text-base text-secondary max-w-3xl">
+                ${escapeHtml(project.summary)}
+              </p>
+            </div>
+          </div>
+
+          <!-- Problem -> Approach -> Outcome Editorial Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="surface-subtle rounded-xl p-4 space-y-1.5">
+              <p class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted flex items-center gap-1.5">
+                <span>Problem</span>
+              </p>
+              <p class="text-xs sm:text-sm text-secondary leading-relaxed">
+                ${escapeHtml(project.problem)}
+              </p>
+            </div>
+
+            <div class="surface-subtle rounded-xl p-4 space-y-1.5">
+              <p class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-muted flex items-center gap-1.5">
+                <span>Approach</span>
+              </p>
+              <p class="text-xs sm:text-sm text-secondary leading-relaxed">
+                ${escapeHtml(project.approach)}
+              </p>
+            </div>
+
+            <div class="rounded-xl p-4 bg-accent-soft space-y-1.5">
+              <p class="font-mono-tech text-[11px] uppercase tracking-[0.12em] text-accent font-semibold flex items-center gap-1.5">
+                <span>Measurable Outcome</span>
+              </p>
+              <p class="text-xs sm:text-sm font-medium text-[var(--text-primary)] leading-relaxed">
+                ${escapeHtml(project.outcome)}
+              </p>
+            </div>
+          </div>
+
+          <!-- Footer Row: Tools & Actions -->
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pt-1">
+            <div class="flex flex-wrap gap-1.5">
+              ${project.tools.map((tool) => `
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-mono-tech surface-subtle text-secondary">
+                  ${escapeHtml(tool)}
+                </span>
+              `).join("")}
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5 shrink-0">
+              <button type="button" data-case-id="${escapeHtml(project.id)}" class="open-case-btn btn-secondary inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium">
+                <span>Case Study</span>
+                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <a href="${escapeHtml(project.linkUrl)}" target="_blank" rel="noopener noreferrer" class="btn-primary inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium">
+                <span>${escapeHtml(project.linkLabel)}</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    // Filter Pill Event Delegation
+    filterContainer.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-filter]");
+      if (!btn) return;
+      activeFilter = btn.getAttribute("data-filter");
+      filterContainer.querySelectorAll("button[data-filter]").forEach((el) => {
+        el.classList.toggle("active", el === btn);
+      });
+      renderProjects(activeFilter);
+    });
+
+    // Case Study Modal Logic
+    const caseModal = document.getElementById("case-study-modal");
+    const closeCaseBtn = document.getElementById("close-case-modal");
+    const closeCaseFooterBtn = document.getElementById("close-case-modal-footer");
+
+    function openCaseStudy(projectId) {
+      const project = PROJECTS.find((p) => p.id === projectId);
+      if (!project) return;
+
+      document.getElementById("modal-project-meta").textContent = `${project.number} · ${project.role} · ${project.year}`;
+      document.getElementById("modal-project-title").textContent = project.title;
+      document.getElementById("modal-project-summary").textContent = project.summary;
+      document.getElementById("modal-project-problem").textContent = project.problem;
+      document.getElementById("modal-project-approach").textContent = project.approach;
+      document.getElementById("modal-project-outcome").textContent = project.outcome;
+
+      document.getElementById("modal-project-highlights").innerHTML = project.highlights
+        .map((item) => `<li class="flex items-start gap-2"><span class="text-accent font-bold">•</span><span>${escapeHtml(item)}</span></li>`)
+        .join("");
+
+      document.getElementById("modal-project-tools").innerHTML = project.tools
+        .map((tool) => `<span class="px-2.5 py-1 rounded-md text-xs font-mono-tech surface-subtle">${escapeHtml(tool)}</span>`)
+        .join("");
+
+      const linkEl = document.getElementById("modal-project-link");
+      linkEl.href = project.linkUrl;
+      document.getElementById("modal-project-link-label").textContent = project.linkLabel;
+
+      caseModal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCaseStudy() {
+      caseModal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    projectsContainer.addEventListener("click", (e) => {
+      const btn = e.target.closest(".open-case-btn");
+      if (!btn) return;
+      openCaseStudy(btn.getAttribute("data-case-id"));
+    });
+
+    closeCaseBtn.addEventListener("click", closeCaseStudy);
+    closeCaseFooterBtn.addEventListener("click", closeCaseStudy);
+    caseModal.addEventListener("click", (e) => {
+      if (e.target === caseModal) closeCaseStudy();
+    });
+
+    // Resume Modal Logic
+    const resumeModal = document.getElementById("resume-modal");
+    const openResumeTriggers = [
+      document.getElementById("open-resume-nav"),
+      document.getElementById("open-resume-mobile"),
+      document.getElementById("open-resume-contact")
+    ];
+
+    function openResumeModal() {
+      resumeModal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+      mobileMenu.classList.add("hidden");
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    function closeResumeModal() {
+      resumeModal.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+
+    openResumeTriggers.forEach((el) => {
+      if (el) el.addEventListener("click", openResumeModal);
+    });
+    document.getElementById("close-resume-modal").addEventListener("click", closeResumeModal);
+    document.getElementById("print-resume-btn").addEventListener("click", () => window.print());
+    resumeModal.addEventListener("click", (e) => {
+      if (e.target === resumeModal) closeResumeModal();
+    });
+
+    // Escape key closes active modal
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (!caseModal.classList.contains("hidden")) closeCaseStudy();
+        if (!resumeModal.classList.contains("hidden")) closeResumeModal();
+      }
+    });
+
+    // Theme Toggle (Light Editorial default, Dark Editorial optional)
+    const themeToggleBtn = document.getElementById("theme-toggle");
+    const sunIcon = document.getElementById("theme-icon-sun");
+    const moonIcon = document.getElementById("theme-icon-moon");
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+        sunIcon.classList.remove("hidden");
+        moonIcon.classList.add("hidden");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        sunIcon.classList.add("hidden");
+        moonIcon.classList.remove("hidden");
+      }
+      try {
+        localStorage.setItem("sk_portfolio_theme", theme);
+      } catch (err) {
+        // Ignore storage errors in sandboxed contexts
+      }
+    }
+
+    let savedTheme = "light";
+    try {
+      savedTheme = localStorage.getItem("sk_portfolio_theme") || "light";
+    } catch (err) {
+      savedTheme = "light";
+    }
+    applyTheme(savedTheme);
+
+    themeToggleBtn.addEventListener("click", () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      applyTheme(isDark ? "light" : "dark");
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    mobileMenuBtn.addEventListener("click", () => {
+      const isHidden = mobileMenu.classList.toggle("hidden");
+      mobileMenuBtn.setAttribute("aria-expanded", String(!isHidden));
+    });
+
+    document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Toast Helper
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.remove("hidden");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 2800);
+    }
+
+    // Copy Email with Fallback
+    const copyEmailBtn = document.getElementById("copy-email-btn");
+    const copyEmailLabel = document.getElementById("copy-email-label");
+
+    copyEmailBtn.addEventListener("click", () => {
+      const email = "shreyaskoulage027@gmail.com";
+      const onCopied = () => {
+        copyEmailLabel.textContent = "Copied";
+        showToast("Email copied: " + email);
+        setTimeout(() => {
+          copyEmailLabel.textContent = "Copy";
+        }, 2000);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(onCopied).catch(() => fallbackCopy(email, onCopied));
+      } else {
+        fallbackCopy(email, onCopied);
+      }
+    });
+
+    function fallbackCopy(text, callback) {
+      const tempInput = document.createElement("textarea");
+      tempInput.value = text;
+      tempInput.setAttribute("readonly", "");
+      tempInput.style.position = "absolute";
+      tempInput.style.left = "-9999px";
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand("copy");
+        callback();
+      } catch (err) {
+        showToast("Email: " + text);
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    // Contact Form Validation & Mailto Handoff
+    const contactForm = document.getElementById("contact-form");
+    const formError = document.getElementById("form-error");
+    const formSuccess = document.getElementById("form-success");
+    const mailtoFallbackLink = document.getElementById("mailto-fallback-link");
+    const resetFormBtn = document.getElementById("reset-form-btn");
+
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("contact-name").value.trim();
+      const email = document.getElementById("contact-email").value.trim();
+      const subject = document.getElementById("contact-subject").value.trim() || "QA Automation Opportunity";
+      const message = document.getElementById("contact-message").value.trim();
+
+      if (!name || !email || !message) {
+        formError.textContent = "Please fill in your name, email address, and message.";
+        formError.classList.remove("hidden");
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        formError.textContent = "Please enter a valid email address.";
+        formError.classList.remove("hidden");
+        return;
+      }
+
+      formError.classList.add("hidden");
+      const bodyText = `Hi Shreyas,\n\n${message}\n\nBest,\n${name} (${email})`;
+      const mailtoHref = `mailto:shreyaskoulage027@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+      mailtoFallbackLink.href = mailtoHref;
+
+      contactForm.classList.add("hidden");
+      formSuccess.classList.remove("hidden");
+      showToast("Email draft prepared");
+    });
+
+    resetFormBtn.addEventListener("click", () => {
+      contactForm.reset();
+      formSuccess.classList.add("hidden");
+      contactForm.classList.remove("hidden");
+    });
+
+    // Subtle Scroll Reveal
+    const revealEls = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add("visible"));
+    }
+
+    // Initial Render
+    document.getElementById("footer-year").textContent = String(new Date().getFullYear());
+    renderProjects("all");
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  </script>
+</body>
+</html>
